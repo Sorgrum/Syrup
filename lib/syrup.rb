@@ -1,1 +1,1 @@
-require 'dvcs/version'
+require 'syrup/version'
