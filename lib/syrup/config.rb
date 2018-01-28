@@ -19,12 +19,13 @@ module Syrup
             replace_map = Hash.new
             
 
-            home_config["rules"].each do |ruleObj| 
-                processRules(replace_map, ruleObj)
-            end
+            # home_config["rules"].each do |ruleObj| 
+            #     processRules(replace_map, ruleObj)
+            # end
 
             local_config["rules"].each do |ruleObj|
                 processRules(replace_map, ruleObj)
+                break
             end
 
             return replace_map
@@ -85,6 +86,8 @@ module Syrup
                 end
 
                 regx = "(?<___SYPCOMPLETE___>"
+
+                pp source
 
                 # Add regex boilerplate for the first three sections
                 fs = Regexp.escape(source[0])   # First symbol

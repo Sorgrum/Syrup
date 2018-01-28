@@ -8,10 +8,15 @@
     },
     "rules": [
         {
+            "multiline": true,
             "rule": [
-                "$$$THIS$$$ when I feel like it $$$COND$$$ dodoo",
+                "public class $$$class_name$$$ do",
+                "$$$class_body$$$",
+                "end",
                 "-->>",
-                "do $$$THIS$$$ while ($$$COND$$$)"
+                "public class $$$class_name$$$ {",
+                "$$$class_body$$$",
+                "}"
             ]
         },
         { 
