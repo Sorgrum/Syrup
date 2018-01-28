@@ -1,0 +1,37 @@
+{
+    "rules": [
+        [
+            "p $$$ARGS$$$;",
+            "-->>",
+            "System.out.println($$$ARGS$$$);"
+        ],
+        [
+            "psvm",
+            "-->>",
+            "public static void main(String[] args)"
+        ],
+        [
+            "if [$$$CONDITION$$$]",
+            "$$$COND$$$:",
+            "-->>",
+            "if ($$$CONDITION$$$)",
+            "$$$COND$$$;"
+        ],
+        [
+            "do",
+            "-->>",
+            "{"
+        ],
+        [
+            "end",
+            "-->>",
+            "}"
+        ],
+        [
+            "if [$$$CONDITION$$$]",
+            "-->>",
+            "if ($$$CONDITION$$$)"
+        ]
+    ]
+}
+
