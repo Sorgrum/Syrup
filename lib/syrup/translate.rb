@@ -34,7 +34,6 @@ module Syrup
             text = File.read(file_in)
             # remove comments then perform all replacements
             text = replace_map.inject(remove_comments(text, lang)){ |str, replace| scan_and_replace(str, replace[0], replace[1])}
-
             File.open(file_out, "w+") {|out| out.puts text}
         end
     end

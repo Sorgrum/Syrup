@@ -1,0 +1,26 @@
+public class testy {
+
+    public static void main(String[] args) {
+
+        int x = 0;
+
+        if(x == 0) {
+
+            String y =  "pineapple";  
+
+            System.out.println(y);
+
+        } else {
+
+            
+            System.out.println("nope"); 
+
+        }
+
+        
+
+        System.out.println(x);
+
+    }
+
+}

@@ -45,7 +45,7 @@ if arg then
             replace_map = Syrup::Config.find(file_ext)
 
             files.each do |file_in|
-                file_out = file_in[0..-4]
+                file_out = file_in.chomp('.syp')
                 Syrup::Translate.transpile(file_in, replace_map, file_out, lang)
             end
         when 'help', '-h'
