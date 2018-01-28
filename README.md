@@ -1,7 +1,7 @@
 # Syrup
 Custom language syntax transpiler/converter
 
-Define your custom language syntax in a .config.[lang you're using].syp (i.e .config.java.syp ) file and and write custom code that transpiles to a supported language of your choice!
+Define your custom language syntax in a .config.[lang you're using].syp (i.e .config.java.syp or .config.py.syp) file and and write custom code that transpiles to a supported language of your choice!
 
 ## Instructions
 
