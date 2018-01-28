@@ -8,15 +8,10 @@
     },
     "rules": [
         {
-            "multiline": true,
             "rule": [
-                "public class $$$class_name$$$ do",
-                "$$$class_body$$$",
-                "end",
+                "$$$THIS$$$ when I feel like it $$$COND$$$ dodoo",
                 "-->>",
-                "public class $$$class_name$$$ {",
-                "$$$class_body$$$",
-                "}"
+                "do $$$THIS$$$ while ($$$COND$$$)"
             ]
         },
         { 
@@ -28,13 +23,6 @@
             ]                                                                                                                                                                                                         
         },
         {
-            "rule": [
-                "psvm",
-                "-->>",
-                "public static void main(String[] args)"
-            ]
-        },
-        {
             "multiline": true,
             "rule": [
                 "p $$$ARGS$$$;",
@@ -44,10 +32,29 @@
         },
         {
             "rule": [
-                "if [$$$condition$$$]",
+                "psvm",
                 "-->>",
-                "if($$$condition$$$)"
+                "public static void main(String[] args)"
+            ]
+        },
+        {
+            "multiline": true,
+            "rule": [
+                "if [$$$CONDITION$$$]",
+                "$$$COND$$$:",
+                "-->>",
+                "if ($$$CONDITION$$$)",
+                "$$$COND$$$;"
+            ]
+        },
+        {
+            "rule": [
+                "end",
+                "-->>",
+                "}"
             ]
         }
     ]
 }
+
+
