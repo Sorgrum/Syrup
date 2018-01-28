@@ -1,37 +1,51 @@
 {
+
     "rules": [
-        [
-            "p $$$ARGS$$$;",
-            "-->>",
-            "System.out.println($$$ARGS$$$);"
-        ],
-        [
-            "psvm",
-            "-->>",
-            "public static void main(String[] args)"
-        ],
-        [
-            "if [$$$CONDITION$$$]",
-            "$$$COND$$$:",
-            "-->>",
-            "if ($$$CONDITION$$$)",
-            "$$$COND$$$;"
-        ],
-        [
-            "do",
-            "-->>",
-            "{"
-        ],
-        [
-            "end",
-            "-->>",
-            "}"
-        ],
-        [
-            "if [$$$CONDITION$$$]",
-            "-->>",
-            "if ($$$CONDITION$$$)"
-        ]
+        {
+            "rule": [
+                "p $$$ARGS$$$;",
+                "-->>",
+                "System.out.println($$$ARGS$$$);"
+            ]
+        },
+        {
+            "rule": [
+                "psvm",
+                "-->>",
+                "public static void main(String[] args)"
+            ]
+        },
+        {
+            "multiline": true,
+            "rule": [
+                "if [$$$CONDITION$$$]",
+                "$$$COND$$$:",
+                "-->>",
+                "if ($$$CONDITION$$$)",
+                "$$$COND$$$;"
+            ]
+        },
+        {
+            "rule": [
+                "do",
+                "-->>",
+                "{"
+            ]
+        },
+        {
+            "rule": [
+                "end",
+                "-->>",
+                "}"
+            ]
+        },
+        {
+            "rule": [
+                "if [$$$CONDITION$$$]",
+                "-->>",
+                "if ($$$CONDITION$$$)"
+            ]
+        }
     ]
 }
 
