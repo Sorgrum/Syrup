@@ -10,11 +10,11 @@ module Syrup
             str
         end
 
-        def self.transpile(file_in, replace_map, output)
+        def self.transpile(file_in, replace_map, file_out)
             text = File.read(file_in)
             text = replace_map.inject(text){ |str, replace| scan_and_replace(str, replace[0], replace[1])}
 
-            File.open(output, "w+") {|out| out.puts text}
+            File.open(file_out, "w+") {|out| out.puts text}
         end
 
         # file_in = 'D:/Eric/Desktop/Syrup/tmp/testy.syp'
