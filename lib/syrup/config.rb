@@ -19,17 +19,15 @@ module Syrup
             replace_map = Hash.new
             
 
-            # home_config["rules"].each do |ruleObj| 
-                # processRules(replace_map, ruleObj)
-                # break
-            # end
-
-            local_config["rules"].each do |ruleObj|
-
+            home_config["rules"].each do |ruleObj| 
                 processRules(replace_map, ruleObj)
-                break
             end
 
+            local_config["rules"].each do |ruleObj|
+                processRules(replace_map, ruleObj)
+            end
+
+            return replace_map
             # replace_map = {
                 # /(?<complete>if\ \[(?<condition>[^\]]+)\])/m => "if (%{condition})",
             # }
@@ -143,7 +141,17 @@ module Syrup
                     end
                 end
                 regx += ")"
-                p regx
+
+                rhs = ""
+                target.each do |section| 
+                    if (isVariable(section)) then
+                        rhs += "%{#{variableName(section)}}"
+                    else
+                        rhs += section
+                    end
+                end
+
+                replace_map[regx] = rhs
             end
         end
         
