@@ -55,7 +55,7 @@ Using the above config you can specify which directories to use as your source w
 }
 ```
 
-###Run
+### Run
 
 To run do the following.
 * Add the full path to Syrup/exe to your path
