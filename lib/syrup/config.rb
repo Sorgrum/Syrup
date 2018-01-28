@@ -98,7 +98,7 @@ module Syrup
 
                 regx += fs
                 regx += "(?<#{fv}>"
-                regx += "[^#{ss}]*)"
+                regx += ".*?)"
                 regx += ss
 
                 # If there are more than three sections, add them iteratively here
@@ -108,7 +108,7 @@ module Syrup
                     ns = Regexp.escape(source[i + 2])   # Next symbol
 
                     regx += "(?<#{nv}>"
-                    regx += "[^#{ns}]*)"
+                    regx += ".*?)"
                     regx += ns
                     i += 3
                 end
@@ -140,7 +140,7 @@ module Syrup
                         if (index == 0) then
                             regx += Regexp.escape(section)
                         else
-                            regx += "[^#{Regexp.escape(section)}]*)"
+                            regx += ".*?)"
                             regx += Regexp.escape(section)
                         end
                     end
