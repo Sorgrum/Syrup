@@ -16,11 +16,5 @@ module Syrup
 
             File.open(file_out, "w+") {|out| out.puts text}
         end
-
-        # file_in = 'D:/Eric/Desktop/Syrup/tmp/testy.syp'
-        # replace_map = {/(?<___SYPCOMPLETE___>if \[(?<condition>[^\]]+)\])/m => "if (%{condition})"}
-        # output = 'D:/Eric/Desktop/Syrup/tmp/testy.java'
-
-        # transpile(file_in, replace_map, output)
     end
 end
