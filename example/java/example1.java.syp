@@ -1,1 +1,6 @@
-example1.java.syp
+public class example1 {
+
+    psvm {
+        p "Hello, world!";
+    }
+}

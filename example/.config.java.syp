@@ -1,0 +1,53 @@
+{
+    "directories": {
+        "java": [
+            "java/",
+            "java/libs/",
+            "java/utils/"
+        ]
+    },
+	"rules": [
+        {
+            "multiline": true,
+            "rule": [
+                "public class $$$class_name$$$ do",
+                "$$$class_body$$$",
+                "end",
+                "-->>",
+                "public class $$$class_name$$$ {",
+                "$$$class_body$$$",
+                "}"
+            ]
+        },
+        {
+            "multiline": true,                                                                                                                                                                                    
+            "rule": [                                                                                                                                                                                             
+                "if [$$$CONDITION$$$] then $$$EXPR$$$ end",                                                                                                                                                       
+                "-->>",                                                                                                                                                                                           
+                "maybe ($$$CONDITION$$$) { $$$EXPR$$$ }"                                                                                                                                                          
+            ]                                                                                                                                                                                                     
+        },
+        {
+            "rule": [
+                "psvm",
+                "-->>",
+                "public static void main(String[] args)"
+            ]
+        },
+        {
+            "multiline": true,
+            "rule": [
+                "p $$$ARGS$$$;",
+                "-->>",
+                "System.out.println($$$ARGS$$$);"
+            ]
+        },
+        {
+            "rule": [
+                "if [$$$condition$$$]",
+                "-->>",
+                "if($$$condition$$$)"
+            ]
+        }
+    ]
+}

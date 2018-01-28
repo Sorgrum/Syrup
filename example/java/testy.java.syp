@@ -1,0 +1,26 @@
+public class testy do
+
+    psvm {
+
+        int x = 0;
+
+        if [x == 0] {
+
+            String y = /* inline comment */ "pineapple"; /* eol1 */ // eol2
+
+            p y;
+
+        } else {
+
+            //test comment
+            p "nope"; //Not chosen
+
+        }
+
+        // another test comment
+
+        p x;
+
+    }
+
+end
