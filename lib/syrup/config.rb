@@ -89,7 +89,6 @@ module Syrup
 
                 regx = "(?<___SYPCOMPLETE___>"
 
-                pp source
 
                 # Add regex boilerplate for the first three sections
                 fs = Regexp.escape(source[0])   # First symbol
