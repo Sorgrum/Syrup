@@ -142,6 +142,8 @@ module Syrup
                 end
                 regx += ")"
 
+                regx = Regexp.new(regx)
+
                 rhs = ""
                 target.each do |section| 
                     if (isVariable(section)) then
