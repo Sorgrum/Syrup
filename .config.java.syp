@@ -8,26 +8,15 @@
     },
     "rules": [
         {
-            "rule": [
-                "$$$THIS$$$ when I feel like it $$$COND$$$ dodoo",
-                "-->>",
-                "do $$$THIS$$$ while ($$$COND$$$)"
-            ]
-        },
-        { 
-            "multiline": true,                                                                                                                                                                                                            
-            "rule": [                                                                                                                                                                                                 
-                "if [$$$CONDITION$$$] then $$$EXPR$$$ end",                                                                                                                                                                               
-                "-->>",                                                                                                                                                                                               
-                "maybe ($$$CONDITION$$$) { $$$EXPR$$$ }"                                                                                                                                                                                
-            ]                                                                                                                                                                                                         
-        },
-        {
             "multiline": true,
             "rule": [
-                "p $$$ARGS$$$;",
+                "public class $$$class_name$$$ do",
+                "$$$class_body$$$",
+                "end",
                 "-->>",
-                "System.out.println($$$ARGS$$$);"
+                "public class $$$class_name$$$ {",
+                "$$$class_body$$$",
+                "}"
             ]
         },
         {
@@ -40,21 +29,17 @@
         {
             "multiline": true,
             "rule": [
-                "if [$$$CONDITION$$$]",
-                "$$$COND$$$:",
+                "p $$$ARGS$$$;",
                 "-->>",
-                "if ($$$CONDITION$$$)",
-                "$$$COND$$$;"
+                "System.out.println($$$ARGS$$$);"
             ]
         },
         {
             "rule": [
-                "end",
+                "if [$$$condition$$$]",
                 "-->>",
-                "}"
+                "if($$$condition$$$)"
             ]
         }
     ]
 }
-
-

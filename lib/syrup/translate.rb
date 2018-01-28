@@ -29,7 +29,10 @@ module Syrup
 
         def self.transpile(file_in, replace_map, file_out, lang)
             text = File.read(file_in)
-            text = replace_map.inject(remove_comments(text, lang)){ |str, replace| scan_and_replace(str, replace[0], replace[1])}
+            text = remove_comments(text, lang)
+            puts text
+            text = replace_map.inject(text){ |str, replace| scan_and_replace(str, replace[0], replace[1])}
+            puts text
 
             File.open(file_out, "w+") {|out| out.puts text}
         end

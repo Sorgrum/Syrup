@@ -17,14 +17,17 @@ module Syrup
             raise "Config file not found for filetype '#{filetype}'" if (home_config.nil? && local_config.nil?)
 
             replace_map = Hash.new
-            
 
-            home_config["rules"].each do |ruleObj| 
-                processRules(replace_map, ruleObj)
+            if (!home_config.nil?)
+                home_config["rules"].each do |ruleObj|
+                    processRules(replace_map, ruleObj)
+                end
             end
 
-            local_config["rules"].each do |ruleObj|
-                processRules(replace_map, ruleObj)
+            if (!local_config.nil?)
+                local_config["rules"].each do |ruleObj|
+                    processRules(replace_map, ruleObj)
+                end
             end
 
             return replace_map
@@ -112,7 +115,7 @@ module Syrup
                 regx = Regexp.new(regx, Regexp::MULTILINE)
 
                 rhs = ""
-                target.each do |section| 
+                target.each do |section|
                     if (isVariable(section)) then
                         rhs += "%{#{variableName(section)}}"
                     else
@@ -142,8 +145,10 @@ module Syrup
                 end
                 regx += ")"
 
+                regx = Regexp.new(regx)
+
                 rhs = ""
-                target.each do |section| 
+                target.each do |section|
                     if (isVariable(section)) then
                         rhs += "%{#{variableName(section)}}"
                     else
@@ -154,21 +159,11 @@ module Syrup
                 replace_map[regx] = rhs
             end
         end
-        
-        def self.read(filetype)
-        # Unprocessed config
-        config = find(filetype)
-        end
 
         def self.validateRule(rule)
             # Check if rule is length one and only a variable
 
             return true
         end
-
-        def self.verify
-
-        end
     end
 end
-
