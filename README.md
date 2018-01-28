@@ -1,7 +1,7 @@
 # Syrup
 Custom language syntax transpiler/converter
 
-Define your custom language syntax in a config.syp file and and write custom code that transpiles to a supported language of your choice!
+Define your custom language syntax in a .config.[lang you're using].syp (i.e .config.java.syp ) file and and write custom code that transpiles to a supported language of your choice!
 
 ## Instructions
 
@@ -38,7 +38,7 @@ Using the above config you can specify which directories to use as your source w
           ]
       },
 ```
-  Rules are how you define your new syntax. variables capture arbitrary length things. You are adjusting the other syntax.
+  Rules are how you define your new syntax. variables capture strings of arbitrary length. You are adjusting the other syntax.
   You can also specify multiline rules.
   Here is another Java Example for printing.
 ```javascript
@@ -61,4 +61,4 @@ To run do the following.
 * Add the full path to Syrup/exe to your path
 * Use the following command in the terminal
 * If you define files in the Config, it'll run on those else it'll run on the files in your current directory.
-* syrup --[$Language You're Using]  
+* syrup -l [$Language You're Using]  
