@@ -179,5 +179,21 @@ module Syrup
 
             return true
         end
+
+        def self.paths(filetype)
+
+            local_filepath = File.expand_path("./.config.#{filetype}.#{Syrup::FILE_EXTENSION}")
+
+            # Either a configuration object or nil
+            local_config = File.exists?(local_filepath) ? JSON.parse(File.read(local_filepath)) : nil
+
+            if local_config.nil? then return Dir.glob(File.expand_path("./*.#{filetype}.#{Syrup::FILE_EXTENSION}")) end
+
+            files = []
+            local_config["directories"][filetype].each do |path|
+                files += (Dir.glob(File.expand_path(path) + "/*.#{filetype}.#{Syrup::FILE_EXTENSION}"))
+            end
+            return files
+        end
     end
 end
