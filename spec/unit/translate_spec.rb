@@ -27,8 +27,8 @@ RSpec.describe Syrup::Translate do
 
     describe '.scan_and_replace' do
         it 'checks that scan and replace properly identifies and replaces text' do
-            replace_map = {/(?<___SYPCOMPLETE___>public\ class\ (?<class_name>[^\ do\n]*)\ do\n(?<class_body>[^\nend]*)\nend)/m => "public class %{class_name} {\n" + "%{class_body}\n" + "}", /(?<___SYPCOMPLETE___>psvm)/ => "public static void main(String[] args)", /(?<___SYPCOMPLETE___>p\ (?<ARGS>[^;]*);)/m => "System.out.println(%{ARGS});", /(?<___SYPCOMPLETE___>if\ \[(?<condition>[^\]]*)\])/ => "if(%{condition})"}
-            test_result = replace_map.inject(text){ |str, replace| Syrup::Translate.scan_and_replace(str, replace[0], replace[1])}
+            replace_map = {/(?<___SYPCOMPLETE___>public\ class\ (?<class_name>.*?)\ do\n(?<class_body>.*?)\nend)/m => "public class %{class_name} {\n" + "%{class_body}\n" + "}", /(?<___SYPCOMPLETE___>if\ \[(?<CONDITION>.*?)\]\ then\ (?<EXPR>.*?)\ end)/m => "maybe (%{CONDITION}) { %{EXPR} }", /(?<___SYPCOMPLETE___>psvm)/ => "public static void main(String[] args)", /(?<___SYPCOMPLETE___>p\ (?<ARGS>.*?);)/m => "System.out.println(%{ARGS});", /(?<___SYPCOMPLETE___>if\ \[(?<condition>.*?)\])/ => "if(%{condition})"}
+            test_result = replace_map.inject(stripped_comments){ |str, replace| Syrup::Translate.scan_and_replace(str, replace[0], replace[1])}
             expect(test_result).to eq(correct_result)
         end
     end
@@ -36,9 +36,9 @@ RSpec.describe Syrup::Translate do
     describe '.transpile' do
         it 'checks that transpile properly reads the input, converts, and writes to the output' do
             File.open(file_in, "w+") {|out| out.puts text}
-            replace_map = {/(?<___SYPCOMPLETE___>public\ class\ (?<class_name>[^\ do\n]*)\ do\n(?<class_body>[^\nend]*)\nend)/m => "public class %{class_name} {\n" + "%{class_body}\n" + "}", /(?<___SYPCOMPLETE___>psvm)/ => "public static void main(String[] args)", /(?<___SYPCOMPLETE___>p\ (?<ARGS>[^;]*);)/m => "System.out.println(%{ARGS});", /(?<___SYPCOMPLETE___>if\ \[(?<condition>[^\]]*)\])/ => "if(%{condition})"}
+            replace_map = {/(?<___SYPCOMPLETE___>public\ class\ (?<class_name>.*?)\ do\n(?<class_body>.*?)\nend)/m => "public class %{class_name} {\n" + "%{class_body}\n" + "}", /(?<___SYPCOMPLETE___>if\ \[(?<CONDITION>.*?)\]\ then\ (?<EXPR>.*?)\ end)/m => "maybe (%{CONDITION}) { %{EXPR} }", /(?<___SYPCOMPLETE___>psvm)/ => "public static void main(String[] args)", /(?<___SYPCOMPLETE___>p\ (?<ARGS>.*?);)/m => "System.out.println(%{ARGS});", /(?<___SYPCOMPLETE___>if\ \[(?<condition>.*?)\])/ => "if(%{condition})"}
             Syrup::Translate.transpile(file_in, replace_map, file_out, 'java')
-            expect(correct_result).to eq(File.read(file_out))
+            expect(correct_result + "\n").to eq(File.read(file_out))
         end
     end
 end
