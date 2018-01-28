@@ -1,10 +1,63 @@
 #!/usr/bin/env ruby
 # coding: utf-8
 
-#This ensures Bundler can find the Gemfile/gemspec
+# This ensures Bundler can find the Gemfile/gemspec
 Dir.chdir(File.expand_path(File.dirname(__FILE__))) do
     require 'bundler/setup'
     require 'syrup'
 end
 
-Syrup::Config.paths("java")
+arg = ARGV[0]
+lang = ARGV[1]
+
+def instructions
+    puts '
+        Custom language syntax transpiler/converter
+
+        Authors:
+            *  Marcelo Gheiler
+            *  Vasim I. Patel
+            *  Eric S. Weiss
+        Usage: syrup <args>
+        Arguments:
+            --language, -l        Target programming language - java, python, or ruby
+            help, -h              Display this information
+            version, -v           Output version and copyright information
+    '
+end
+
+if arg then
+    case arg
+        when '--language', '-l'
+            if !lang
+                $stderr.puts 'ERROR: No target language given'
+                exit 1
+            end
+
+            file_ext = case lang
+                when 'python' then 'py'
+                when 'java' then 'java'
+                when 'ruby' then 'rb'
+                else raise "Invalid language: #{lang} specified!"
+            end
+
+            files = Syrup::Config.paths(file_ext)
+            replace_map = Syrup::Config.find(file_ext)
+
+            files.each do |file_in|
+                file_out = file_in[0..-4]
+                Syrup::Translate.transpile(file_in, replace_map, file_out, lang)
+            end
+        when 'help', '-h'
+            instructions
+        when 'version', '-v'
+            $stderr.puts "Version: #{Syrup::VERSION}"
+            system("cat #{File.expand_path(File.dirname(__FILE__))}/../LICENSE")
+        else
+            puts 'Invalid parameters, please use help or -h to view instructions'
+            exit 1
+    end
+else
+    puts 'Usage: syrup <args>\nNeeds an argument, please use help or -h to view instructions'
+    exit 1
+end
