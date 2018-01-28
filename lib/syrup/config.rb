@@ -66,30 +66,11 @@ module Syrup
             # Boolean, true if it is multiline, false otherwise
             multiline = ruleObj["multiline"] == true ? true : false
 
-            validateRule(source)
+            validateRule(source, multiline)
 
             if (multiline) then
 
-                # Sanity checks
-                # First and last sections /MUST/ be symbols
-                raise "Multiline rules can not start or end with a variable" if (isVariable(source[0]) || isVariable(source[-1]))
-
-                # Ensure that every other section is a variable
-                source.each_with_index do |e, i|
-                    if (i % 2 == 0) then
-                        if (isVariable(source[i])) then
-                            raise "Delimiter splitting failed"
-                        end
-                    else
-                        if (!isVariable(source[i])) then
-                            raise "Delimiter splitting failed"
-                        end
-                    end
-                end
-
                 regx = "(?<___SYPCOMPLETE___>"
-
-                pp source
 
                 # Add regex boilerplate for the first three sections
                 fs = Regexp.escape(source[0])   # First symbol
@@ -162,8 +143,39 @@ module Syrup
             end
         end
 
-        def self.validateRule(rule)
+        def self.validateRule(rule, multiline)
+            if multiline then
+                # Sanity checks
+                # First and last sections /MUST/ be symbols
+                raise "Multiline rules can not start or end with a variable" if (isVariable(rule[0]) || isVariable(rule[-1]))
+
+                # Ensure that every other section is a variable
+                rule.each_with_index do |e, i|
+                    if (i % 2 == 0) then
+                        if (isVariable(rule[i])) then
+                            raise "Delimiter splitting failed"
+                        end
+                    else
+                        if (!isVariable(rule[i])) then
+                            raise "Delimiter splitting failed"
+                        end
+                    end
+                end
+            end
+
             # Check if rule is length one and only a variable
+            raise "Rules must consist of more than just a variable" if (rule.size == 1 && isVariable(rule[0]))
+
+            # Make sure there are no two variables in a row
+            rule.each_with_index do |e, i|
+                if isVariable(rule[i]) then
+                    if !rule[i + 1].nil?
+                        if isVariable(rule[i + 1])
+                            raise "Variables cannot be placed next to each other and must be separated by symbols of some sort"
+                        end
+                    end
+                end
+            end
 
             return true
         end
