@@ -1,7 +1,22 @@
 {
-
     "rules": [
         {
+            "rule": [
+                "$$$THIS$$$ when I feel like it $$$COND$$$ dodoo",
+                "-->>",
+                "do $$$THIS$$$ while ($$$COND$$$)"
+            ]
+        },
+        { 
+            "multiline": true,                                                                                                                                                                                                            
+            "rule": [                                                                                                                                                                                                 
+                "if [$$$CONDITION$$$] then $$$EXPR$$$ end",                                                                                                                                                                               
+                "-->>",                                                                                                                                                                                               
+                "maybe ($$$CONDITION$$$) { $$$EXPR$$$ }"                                                                                                                                                                                
+            ]                                                                                                                                                                                                         
+        },
+        {
+            "multiline": true,
             "rule": [
                 "p $$$ARGS$$$;",
                 "-->>",
@@ -27,25 +42,12 @@
         },
         {
             "rule": [
-                "do",
-                "-->>",
-                "{"
-            ]
-        },
-        {
-            "rule": [
                 "end",
                 "-->>",
                 "}"
             ]
-        },
-        {
-            "rule": [
-                "if [$$$CONDITION$$$]",
-                "-->>",
-                "if ($$$CONDITION$$$)"
-            ]
         }
     ]
 }
+
 
