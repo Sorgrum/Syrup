@@ -1,4 +1,9 @@
 {
+    "directories": [
+        "java/",
+        "java/libs/",
+        "java/utils/"
+    ],
     "rules": [
         {
             "rule": [
