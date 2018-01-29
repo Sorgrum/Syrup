@@ -64,4 +64,4 @@ To run do the following.
 * Add the full path to Syrup/exe to your path
 * Use the following command in the terminal
 * If you define files in the Config, it'll run on those else it'll run on the files in your current directory.
-* syrup -l [$Language You're Using]  
+* `syrup -l [language]`
