@@ -34,7 +34,7 @@ Using the above config you can specify which directories to use as your source w
     "rules": [
         {
             "rule": [
-                "$$$Var$$$ continue ()$$$COND$$$)", use $$$ for variables
+                "$$$Var$$$ continue ()$$$COND$$$)", // use $$$ for variables
                 "-->>",
                 "do $$$Var$$$ while ($$$COND$$$)"
             ]
