@@ -17,42 +17,45 @@ Create .syp file containing JSON definitions in the following form
 
 ```javascript
 {
-  "directories": {
-      "java": [
-          "java/",
-          "java/libs/",
-          "java/utils/"
-      ]
-  },
+    "directories": {
+        "java": [
+            "java/",
+            "java/libs/",
+            "java/utils/"
+        ]
+    },
+    ...
+}
 ```
 
 Using the above config you can specify which directories to use as your source with the language being a choice as well.  
 
 ```javascript
-  "rules": [
-      {
-          "rule": [
-              "$$$Var$$$ continue ()$$$COND$$$)", use $$$ for variables
-              "-->>",
-              "do $$$Var$$$ while ($$$COND$$$)"
-          ]
-      },
+    "rules": [
+        {
+            "rule": [
+                "$$$Var$$$ continue ()$$$COND$$$)", use $$$ for variables
+                "-->>",
+                "do $$$Var$$$ while ($$$COND$$$)"
+            ]
+        },
+        ...
+    ]
 ```
   Rules are how you define your new syntax. variables capture strings of arbitrary length. You are adjusting the other syntax.
   You can also specify multiline rules.
   Here is another Java Example for printing.
 ```javascript
-
-      {
+    {
         "rule": [
-          "multiline": true,
-          "rule": [
-              "p $$$ARGS$$$;",
-              "-->>",
-              "System.out.println($$$ARGS$$$);"
-          ]
-      },
-}
+            "multiline": true,
+            "rule": [
+                "p $$$ARGS$$$;",
+                "-->>",
+                "System.out.println($$$ARGS$$$);"
+            ]
+        },
+    }
 ```
 
 ### Run
